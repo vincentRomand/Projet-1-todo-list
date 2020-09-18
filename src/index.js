@@ -25,10 +25,16 @@ const displayTodo = () => {
 
 const createTodoElement = (todo, index) => {
   const li = document.createElement("li");
+  const buttonDelete = document.createElement("button");
+  buttonDelete.innerHTML = "Supprimer";
+  buttonDelete.addEventListener("click", event => {
+    deleteTodo(index);
+  });
   li.innerHTML = `
     <span class="todo ${todo.done ? "done" : ""}"></span>
     <p>${todo.text}</p>
   `;
+  li.appendChild(buttonDelete);
   return li;
 };
 
@@ -44,6 +50,11 @@ const addTodo = (value) => {
     text: value,
     done: false,
   });
+  displayTodo();
+}
+
+const deleteTodo = (index) => {
+  todos.splice(index, 1);
   displayTodo();
 }
 
